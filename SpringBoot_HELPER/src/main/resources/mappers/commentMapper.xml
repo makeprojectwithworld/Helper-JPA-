@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- name space는 UserRepo의 fully qualified name으로 설정한다. -->
+
+<mapper namespace="mpww.helper.domain.board.comment.model.dao.CommentDao">
+
+<insert id="addComment" parameterType="CommentDto">
+    INSERT INTO comment (board_seq,user_nickname, gym_name, content,regist_date)
+    VALUES (#{boardSeq},#{userNickname}, #{gymName}, #{content}, #{registDate})
+</insert>
+
+    <delete id="removeComment" parameterType="int">
+        DELETE  FROM comment WHERE seq = #{seq}
+    </delete>
+
+    <update id="updateComment" parameterType="CommentDto">
+        UPDATE  comment SET content = #{content}
+        WHERE seq = #{seq}
+    </update>
+
+    <select id="getComments" parameterType="int">
+        SELECT * FROM comment WHERE board_seq = #{boardSeq}
+    </select>
+
+</mapper>

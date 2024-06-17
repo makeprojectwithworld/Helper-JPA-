@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- name space는 UserRepo의 fully qualified name으로 설정한다. -->
+
+<mapper namespace="mpww.helper.domain.gym.model.dao.GymDao">
+
+    <select id="getAllGymList">
+    SELECT * from `helper`.`gym`
+    </select>
+
+    <select id="selectOneGym" parameterType="String">
+        SELECT * from `helper`.`gym` where name = #{name}
+    </select>
+
+
+</mapper>
