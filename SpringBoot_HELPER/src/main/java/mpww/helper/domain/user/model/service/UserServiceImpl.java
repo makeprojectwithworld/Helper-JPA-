@@ -10,7 +10,7 @@ import mpww.helper.domain.user.common.response.ResponseDto;
 import mpww.helper.domain.user.common.response.auth.CheckCertificationResponseDto;
 import mpww.helper.domain.user.common.response.auth.EmailCertificationResponseDto;
 import mpww.helper.domain.user.common.response.auth.IdCheckResponseDto;
-import mpww.helper.domain.user.model.dao.UserDao;
+import mpww.helper.domain.user.model.dao.UserRepository;
 import mpww.helper.domain.user.model.dto.CertificationInfo;
 import mpww.helper.domain.user.model.dto.User;
 import mpww.helper.global.provider.EmailProvider;
@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService{
 
-    private final UserDao userDao;
+    private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
     private final EmailProvider emailProvider;
 
@@ -35,17 +35,17 @@ public class UserServiceImpl implements UserService{
         CertificationInfo certificationInfo = signUpRequest.getCertificationInfo();
 
 
-        boolean isVerified = userDao.emailVerificationCodeIsTrue(certificationInfo);
+        boolean isVerified = userRepository.emailVerificationCodeIsTrue(certificationInfo);
 
         if(!isVerified) return 0;
 
 
-        return userDao.signUp(signUpRequest.getUser());
+        return userRepository.signUp(signUpRequest.getUser());
     }
 
     @Override
     public User login(User user) {
-        User loginUser = userDao.login(user);
+        User loginUser = userRepository.login(user);
         if(loginUser != null) {
             loginUser.setAccessToken(jwtUtil.createToken(loginUser.getId(),loginUser.getNickName(),loginUser.getGymName() ));
 
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService{
 
         try{
             String userId = dto.getId();
-            boolean isExisted = userDao.existsByUserId(userId);
+            boolean isExisted = userRepository.existsByUserId(userId);
 
             if(isExisted) return IdCheckResponseDto.dupicateId();
 
@@ -79,10 +79,10 @@ public class UserServiceImpl implements UserService{
             String email = dto.getEmail();
 
 
-            boolean isExistId = userDao.existsByUserId(userId);
+            boolean isExistId = userRepository.existsByUserId(userId);
             if(isExistId) return EmailCertificationResponseDto.duplicateId();
 
-            boolean isExistEmail = userDao.existsByEmail(email);
+            boolean isExistEmail = userRepository.existsByEmail(email);
             if(isExistEmail) return EmailCertificationResponseDto.duplicateEmail();
 
             String certificationNumber = CertificationNumber.getCertificationNumber();
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService{
 
             CertificationInfo info = new CertificationInfo(userId,email,certificationNumber);
 
-            userDao.saveCertificationInfo(info);
+            userRepository.saveCertificationInfo(info);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService{
 
             CertificationInfo userInfo = new CertificationInfo(userId,email,certificationNumber);
 
-            userDao.emailVerificationCodeIsTrue(userInfo);
+            userRepository.emailVerificationCodeIsTrue(userInfo);
 
 
         } catch (Exception e){

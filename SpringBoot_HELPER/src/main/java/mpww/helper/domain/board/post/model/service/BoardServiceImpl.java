@@ -3,7 +3,7 @@ package mpww.helper.domain.board.post.model.service;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import mpww.helper.domain.board.post.model.dao.BoardDao;
+import mpww.helper.domain.board.post.model.dao.BoardRepository;
 import mpww.helper.domain.board.post.model.dto.Board;
 import mpww.helper.domain.board.post.model.dto.SearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,28 +17,28 @@ import java.util.List;
 @AllArgsConstructor
 public class BoardServiceImpl implements  BoardService {
 
-    private final BoardDao boardDao;
+    private final BoardRepository boardRepository;
 
 
 
     @Override
     public int removeBoard(int id) {
-        return boardDao.deleteBoard(id);
+        return boardRepository.deleteBoard(id);
     }
 
     @Override
     public List<Board> selectAll() {
-        return boardDao.selectAll();
+        return boardRepository.selectAll();
     }
 
     @Override
     public List<Board> searchByCondition(SearchCondition con) {
-        return boardDao.searchByCondition(con);
+        return boardRepository.searchByCondition(con);
     }
 
     @Override
     public int updateBoard(Board updateBoard) {
-        return boardDao.updateBoard(updateBoard);
+        return boardRepository.updateBoard(updateBoard);
     }
 
     @Override
@@ -52,12 +52,12 @@ public class BoardServiceImpl implements  BoardService {
         String strNowDate = simpleDateFormat.format(nowDate);
         //지정한 포맷으로 변환
         board.setRegistDate(strNowDate);
-        boardDao.writeBoard(board);
+        boardRepository.writeBoard(board);
     }
 
     @Override
     public Board getBoard(int seq) {
-        return boardDao.selectBoard(seq);
+        return boardRepository.selectBoard(seq);
     }
 
 

@@ -4,10 +4,11 @@ import mpww.helper.domain.user.common.request.auth.SignUpRequest;
 import mpww.helper.domain.user.model.dto.CertificationInfo;
 import mpww.helper.domain.user.model.dto.User;
 import mpww.helper.domain.user.model.dto.SocialUser;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface UserDao {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     int signUp(User user);
 

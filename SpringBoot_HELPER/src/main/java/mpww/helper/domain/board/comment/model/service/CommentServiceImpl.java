@@ -2,7 +2,7 @@ package mpww.helper.domain.board.comment.model.service;
 
 
 import lombok.AllArgsConstructor;
-import mpww.helper.domain.board.comment.model.dao.CommentDao;
+import mpww.helper.domain.board.comment.model.dao.CommentRepository;
 import mpww.helper.domain.board.comment.model.dto.CommentDto;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +15,11 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService{
 
 
-    private final CommentDao commentDao;
+    private final CommentRepository commentRepository;
 
     @Override
     public int removeComment(int seq) {
-        return commentDao.removeComment(seq);
+        return commentRepository.removeComment(seq);
     }
 
     @Override
@@ -33,18 +33,18 @@ public class CommentServiceImpl implements CommentService{
         comment.setGymName(gymName);
         comment.setUserNickname(userNickname);
 
-        commentDao.addComment(comment);
+        commentRepository.addComment(comment);
     }
 
     @Override
     public int updateComment(CommentDto comment) {
-        return commentDao.updateComment(comment);
+        return commentRepository.updateComment(comment);
     }
 
     @Override
     public List<CommentDto> SelectAll(int boardSeq) {
 
 
-        return commentDao.getComments(boardSeq);
+        return commentRepository.getComments(boardSeq);
     }
 }

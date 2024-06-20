@@ -2,7 +2,7 @@ package mpww.helper.domain.user.model.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import mpww.helper.domain.user.model.dao.UserDao;
+import mpww.helper.domain.user.model.dao.UserRepository;
 import mpww.helper.domain.user.model.dto.CustomOauth2User;
 import mpww.helper.domain.user.model.dto.SocialUser;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -18,7 +18,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
 
-    private final UserDao userDao;
+    private final UserRepository userRepository;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest request) throws OAuth2AuthenticationException {
@@ -51,7 +51,7 @@ public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
             user = new SocialUser(userId,password,nickname,email);
         }
 
-        userDao.snsLogin(user);
+        userRepository.snsLogin(user);
 
         return new CustomOauth2User(userId);
     }

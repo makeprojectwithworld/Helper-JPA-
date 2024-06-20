@@ -1,7 +1,7 @@
 package mpww.helper.domain.gym.model.service;
 
 import lombok.AllArgsConstructor;
-import mpww.helper.domain.gym.model.dao.GymDao;
+import mpww.helper.domain.gym.model.dao.GymRepository;
 import mpww.helper.domain.gym.model.dto.GymDto;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +12,15 @@ import java.util.List;
 @AllArgsConstructor
 public class GymServiceImpl implements GymService{
 
-    private final GymDao gymDao;
+    private final GymRepository gymRepository;
 
     @Override
     public List<GymDto> getAllgyms() {
-        return gymDao.getAllGymList();
+        return gymRepository.getAllGymList();
     }
 
     @Override
     public GymDto selectOneGym(String name) {
-        return gymDao.selectOneGym(name);
+        return gymRepository.selectOneGym(name);
     }
 }
