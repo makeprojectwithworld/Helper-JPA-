@@ -2,8 +2,7 @@ package mpww.helper.domain.board.post.model.service;
 
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import mpww.helper.domain.board.post.model.dao.BoardRepository;
+import mpww.helper.domain.board.post.model.repository.BoardRepository;
 import mpww.helper.domain.board.post.model.dto.Board;
 import mpww.helper.domain.board.post.model.dto.SearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,6 @@ public class BoardServiceImpl implements  BoardService {
 
     @Override
     public void writeBoard(Board board, String userNickname, String GymName) {
-        System.out.println("오잉");
         board.setUserNickname(userNickname);
         board.setGymName(GymName);
         Date nowDate = new Date();

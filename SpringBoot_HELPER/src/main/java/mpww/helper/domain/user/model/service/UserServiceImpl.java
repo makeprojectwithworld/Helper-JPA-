@@ -10,7 +10,7 @@ import mpww.helper.domain.user.common.response.ResponseDto;
 import mpww.helper.domain.user.common.response.auth.CheckCertificationResponseDto;
 import mpww.helper.domain.user.common.response.auth.EmailCertificationResponseDto;
 import mpww.helper.domain.user.common.response.auth.IdCheckResponseDto;
-import mpww.helper.domain.user.model.dao.UserRepository;
+import mpww.helper.domain.user.model.repository.UserRepository;
 import mpww.helper.domain.user.model.dto.CertificationInfo;
 import mpww.helper.domain.user.model.dto.User;
 import mpww.helper.global.provider.EmailProvider;

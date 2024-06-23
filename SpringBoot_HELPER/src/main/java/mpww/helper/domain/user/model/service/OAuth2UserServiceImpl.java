@@ -2,7 +2,7 @@ package mpww.helper.domain.user.model.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import mpww.helper.domain.user.model.dao.UserRepository;
+import mpww.helper.domain.user.model.repository.UserRepository;
 import mpww.helper.domain.user.model.dto.CustomOauth2User;
 import mpww.helper.domain.user.model.dto.SocialUser;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

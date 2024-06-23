@@ -1,12 +1,12 @@
 package mpww.helper.domain.gym.model.service;
 
-import mpww.helper.domain.gym.model.dto.GymDto;
+import mpww.helper.domain.gym.model.dto.Gym;
 
 import java.util.List;
 
 public interface GymService {
 
-    List<GymDto> getAllgyms();
+    List<Gym> getAllgyms();
 
-    GymDto selectOneGym(String gymName);
+    Gym selectOneGym(String gymName);
 }

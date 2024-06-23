@@ -4,7 +4,7 @@ package mpww.helper.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import mpww.helper.domain.board.comment.model.dto.CommentDto;
+import mpww.helper.domain.board.comment.model.dto.Comment;
 import mpww.helper.domain.board.comment.model.service.CommentService;
 import mpww.helper.global.util.JwtUtil;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ public class CommentController {
 
     @Operation(summary = "댓글 작성", description = "게시글에 댓글을 작성합니다")
     @PostMapping("/comment/add")
-   public ResponseEntity<?> addComment(@RequestBody CommentDto comment, @RequestHeader("Authorization") String token) {
+   public ResponseEntity<?> addComment(@RequestBody Comment comment, @RequestHeader("Authorization") String token) {
 
         try {
             // 토큰에서 유저 정보 추출
@@ -52,7 +52,7 @@ public class CommentController {
 
    @Operation(summary = "댓글 수정하기", description = "기존 댓글을 수정합니다.")
    @PutMapping("/comment/{seq}")
-   public ResponseEntity<?> updateComment(CommentDto comment) {
+   public ResponseEntity<?> updateComment(Comment comment) {
         int result = commentService.updateComment(comment);
         if (result == 1) {
             return ResponseEntity.ok().build();
@@ -63,7 +63,7 @@ public class CommentController {
    @Operation(summary = "댓글 전체 보기", description = "해당 게시글 댓글을 모두 봅니다.")
     @GetMapping("/comment/{boardSeq}")
     public ResponseEntity<?> getComments(@PathVariable int boardSeq) {
-       List<CommentDto> commentDtoList = commentService.SelectAll(boardSeq);
+       List<Comment> commentDtoList = commentService.SelectAll(boardSeq);
 
        return ResponseEntity.ok().body(commentDtoList);
    }

@@ -2,8 +2,8 @@ package mpww.helper.domain.board.comment.model.service;
 
 
 import lombok.AllArgsConstructor;
-import mpww.helper.domain.board.comment.model.dao.CommentRepository;
-import mpww.helper.domain.board.comment.model.dto.CommentDto;
+import mpww.helper.domain.board.comment.model.dto.Comment;
+import mpww.helper.domain.board.comment.model.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -23,7 +23,7 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public void addComment(CommentDto comment, String userNickname, String gymName) {
+    public void addComment(Comment comment, String userNickname, String gymName) {
         Date nowDate = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
         //원하는 데이터 포맷 지정
@@ -37,13 +37,12 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public int updateComment(CommentDto comment) {
+    public int updateComment(Comment comment) {
         return commentRepository.updateComment(comment);
     }
 
     @Override
-    public List<CommentDto> SelectAll(int boardSeq) {
-
+    public List<Comment> SelectAll(int boardSeq) {
 
         return commentRepository.getComments(boardSeq);
     }
